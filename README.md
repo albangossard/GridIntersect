@@ -21,7 +21,7 @@ Printing the intersection gives the following result :
 <pre><code>
 list<Point>::iterator it;
 for (it=intersectPt.begin(); it!=intersectPt.end(); ++it){
-    cout<<it->x<<" "<<it->y<<endl;
+    cout << it->x << " " << it->y << endl;
 }
 </code></pre>
 <pre><code>
