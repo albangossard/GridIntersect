@@ -7,4 +7,5 @@ add_executable(
         GridIntersect
         gridIntersect.h
         gridIntersect.cxx
+        example.cpp
 )
