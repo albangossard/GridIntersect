@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+using namespace std;
+
 
 struct Point{
     double x,y;
@@ -15,8 +17,11 @@ private:
     int Nx, Ny;
     double Dx, Dy;
     Point * grid;
+    struct ProjectionPoint{
+        double val;
+        double t;
+    };
 public:
     Grid(int Nx, int Ny);
-    // std::list<Point>* intersect(Point* pt1, Point* pt2);
-    void intersect(Point* pt1, Point* pt2, std::list<Point>& intersectPt);
+    void intersect(Point* pt1, Point* pt2, list<Point>& intersectPt);
 };

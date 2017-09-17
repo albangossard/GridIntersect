@@ -1,6 +1,5 @@
 #include "gridIntersect.h"
 
-using namespace std;
 
 Grid::Grid(int Nx, int Ny){
     this->Nx=Nx;
@@ -9,29 +8,13 @@ Grid::Grid(int Nx, int Ny){
     this->Dy=1.0/((double)(Ny-1));
     this->grid=(Point*)malloc(sizeof(Point)*Nx*Ny);
 }
-struct ProjectionPoint{
-    double val;
-    double t;
-};
-// void printProjectionPoint(list<ProjectionPoint>* l){
-//     list<ProjectionPoint>::iterator i;
-//     for (i=l->begin(); i!=l->end(); ++i){
-//         cout<<"t="<<i->t<<" val="<<i->val<<endl;
-//     }
-//     cout<<endl;
-// }
-void Grid::intersect(Point* pt1, Point* pt2, std::list<Point>& intersectPt){
-    std::list<ProjectionPoint> listX;
-    std::list<ProjectionPoint> listY;
+void Grid::intersect(Point* pt1, Point* pt2, list<Point>& intersectPt){
+    list<ProjectionPoint> listX;
+    list<ProjectionPoint> listY;
     int floorX1 = floor(pt1->x*(this->Nx-1));
     int floorX2 = floor(pt2->x*(this->Nx-1));
     int floorY1 = floor(pt1->y*(this->Ny-1));
     int floorY2 = floor(pt2->y*(this->Ny-1));
-    // cout<<"floorX1 "<<floorX1<<endl;
-    // cout<<"floorX2 "<<floorX2<<endl;
-    // cout<<"floorY1 "<<floorY1<<endl;
-    // cout<<"floorY2 "<<floorY2<<endl;
-    // cout<<endl;
     double lenX = abs(pt1->x-pt2->x);
     double lenY = abs(pt1->y-pt2->y);
     ProjectionPoint tmp;
@@ -48,8 +31,6 @@ void Grid::intersect(Point* pt1, Point* pt2, std::list<Point>& intersectPt){
             listX.push_back(tmp);
         }
     }
-    // cout<<"### listX ###"<<endl;
-    // printProjectionPoint(&listX);
     if (floorY1<floorY2){
         for (int indY=floorY1+1; indY<=floorY2; indY++){
             tmp.val=indY*this->Dy;
@@ -63,8 +44,6 @@ void Grid::intersect(Point* pt1, Point* pt2, std::list<Point>& intersectPt){
             listY.push_back(tmp);
         }
     }
-    // cout<<"### listY ###"<<endl;
-    // printProjectionPoint(&listY);
 
     double t;
     Point tmpPt;
@@ -106,20 +85,4 @@ void Grid::intersect(Point* pt1, Point* pt2, std::list<Point>& intersectPt){
     tmpPt.x=pt2->x;
     tmpPt.y=pt2->y;
     intersectPt.push_back(tmpPt);
-    // cout<<"t="<<t<<endl;
-}
-
-int main(){
-    Grid Map(5,5);
-    Point pt1;
-    Point pt2;
-    pt1.x=0.8/4.0; pt1.y=0.2/4.0;
-    pt2.x=2.1/4.0; pt2.y=3.7/4.0;
-    std::list<Point> intersectPt;
-    Map.intersect(&pt1,&pt2,intersectPt);
-    while (!intersectPt.empty()){
-        cout<<intersectPt.front().x<<" "<<intersectPt.front().y<<endl;
-        intersectPt.pop_front();
-    }
-    return 0;
 }
