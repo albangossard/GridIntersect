@@ -1,5 +1,5 @@
 # GridIntersect
-A library to compute the intersection of segments with an orthogonal mesh grid
+A library to compute the intersection of segments with an orthogonal mesh grid.
 
 ## Example
 This library is easy to use. To compute mesh grid intersection with a segment, just declare a new grid :
